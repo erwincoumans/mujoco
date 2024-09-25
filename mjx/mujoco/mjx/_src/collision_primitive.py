@@ -37,9 +37,12 @@ def collider(ncon: int):
       dist, pos, frame = jax.vmap(func)(info1, info2)
       if ncon > 1:
         return jax.tree_util.tree_map(jp.concatenate, (dist, pos, frame))
-      return dist, pos, frame
+      ret = dist,pos,frame
+      print("ret=", ret)
+      return ret
 
     collide.ncon = ncon
+    print("collide=", collide)
     return collide
 
   return wrapper
